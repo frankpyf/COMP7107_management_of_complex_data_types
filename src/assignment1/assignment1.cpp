@@ -3,6 +3,7 @@
 #include <fstream>
 #include <random>
 #include <assert.h>
+#include <algorithm>
 
 int main(int argc, char* argv[])
 {
