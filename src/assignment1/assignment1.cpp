@@ -51,6 +51,8 @@ int main(int argc, char* argv[])
     float min_similarity = 1.0f;
     float max_similarity = 0.0f;
     float avg_similarity = 0.0f;
+    constexpr int count = 499500;
+    
     std::array<float, 1000> random_sample_idx{};
 
     for(int i = 0; i < 1000; ++i)
@@ -68,9 +70,11 @@ int main(int argc, char* argv[])
             avg_similarity += similarity;
         }
     }
+    avg_similarity /= (1.0f * count);
 
     std::cout << "min similarity: " << min_similarity << '\n';
     std::cout << "max similarity: " << max_similarity << '\n';
+    std::cout << "average similarity: " << avg_similarity << '\n';
     std::cout << std::flush;
     return 0;
 }
