@@ -19,27 +19,6 @@ namespace comp7107
     struct ForestCoverType
     {
         ForestCoverType() = default;
-        // // Elevation in meters
-        // float elevation                             = 0.0f;
-        // // Aspect in degrees azimuth
-        // float aspect                                = 0.0f;
-        // // Slope in degrees
-        // float slope                                 = 0.0f;
-        // // Horz Dist to nearest surface water features
-        // float horizontal_distance_to_hydrology      = 0.0f;
-        // // Vert Dist to nearest surface water features
-        // float vertical_distance_to_hydrology        = 0.0f;
-        // // Horz Dist to nearest roadway
-        // float horizontal_distance_to_roadways       = 0.0f;
-        // // Hillshade index at 9am, summer solstice
-        // float hillshade_9am                         = 0.0f;
-        // // Hillshade index at noon, summer soltice
-        // float hillshade_noon                        = 0.0f;
-        // // Hillshade index at 3pm, summer solstice
-        // float hillshade_3pm                         = 0.0f;
-        // // Horz Dist to nearest wildfire ignition points
-        // float horizontal_distance_to_fire_points    = 0.0f;
-
         std::array<float, 10> quantative_attributes{0.0f};
         // Wilderness area designation
         std::bitset<4> wilderness_area;
