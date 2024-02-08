@@ -105,7 +105,6 @@ int main(int argc, char* argv[])
         compute_and_report_similarity(sample_idx);
         std::cout << '\n';
     }
-    
 
     std::cout << std::flush;
     return 0;

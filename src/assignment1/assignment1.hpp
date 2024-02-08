@@ -159,7 +159,7 @@ namespace comp7107
         // Quantative attributes
         for(int i = 0; i < 10; ++i)
         {
-            float length = abs(f1.quantative_attributes[i] - f2.quantative_attributes[i]);
+            float length = std::abs(f1.quantative_attributes[i] - f2.quantative_attributes[i]);
             similarity += 1.0f / (1.0f + length);
             ++sum_delta;
         }
