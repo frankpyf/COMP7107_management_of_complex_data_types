@@ -1,9 +1,14 @@
 #include "assignment1.hpp"
-#include <unistd.h>
 #include <fstream>
 #include <random>
 #include <assert.h>
 #include <algorithm>
+#ifdef _WIN32
+#include <io.h>
+#include <process.h>
+#else
+#include <unistd.h>
+#endif
 
 int main(int argc, char* argv[])
 {
