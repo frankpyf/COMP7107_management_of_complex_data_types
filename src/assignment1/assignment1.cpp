@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
         auto& cur_record = records.emplace_back();
         comp7107::string_to_forest_type(str_line, cur_record);
     }
-    sort(records.begin(), records.end());
+    std::sort(records.begin(), records.end());
 
     ///////////////////////////////////////
     // Part 1: 
