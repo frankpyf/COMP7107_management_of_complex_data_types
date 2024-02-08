@@ -3,27 +3,13 @@
 #include <random>
 #include <assert.h>
 #include <algorithm>
-#ifdef _WIN32
-#include <io.h>
-#include <process.h>
-#else
-#include <unistd.h>
-#endif
 
 int main(int argc, char* argv[])
 {
-    int ch = -1;
     uint16_t k = 0;
-    while((ch = getopt(argc, argv, "k:")) != -1)
-    {
-        switch(ch)
-        {
-            case 'k':
-                k = std::stoi(optarg);
-                break;
-        }
-    }
-
+    if(argc > 1)
+        k = std::stoi(argv[1]);
+    
     std::vector<comp7107::ForestCoverType> records;
 
     std::ifstream input_file("./covtype.data");
