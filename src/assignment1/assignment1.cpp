@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     std::array<size_t, 1000> sample_idx{};
     for(int i = 0; i < 1000; ++i)
     {
-        int random_idx = i + std::rand() % 580;
+        int random_idx = i * 580 + std::rand() % 580;
         sample_idx[i] = random_idx;
     }
     std::cout << "similarity report of random samples: " << '\n';
