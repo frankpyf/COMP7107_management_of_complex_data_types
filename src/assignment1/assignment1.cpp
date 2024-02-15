@@ -3,9 +3,11 @@
 #include <random>
 #include <assert.h>
 #include <algorithm>
+#include <chrono>
 
 int main(int argc, char* argv[])
 {
+    std::chrono::steady_clock::time_point start(std::chrono::steady_clock::now());
     uint16_t k = 0;
     if(argc > 1)
         k = std::stoi(argv[1]);
@@ -97,6 +99,9 @@ int main(int argc, char* argv[])
         compute_and_report_similarity(sample_idx);
         std::cout << '\n';
     }
+    std::chrono::steady_clock::time_point end(std::chrono::steady_clock::now());
+    std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+    std::cout << "This program takes " << duration.count() << "s\n";
 
     std::cout << std::flush;
     return 0;

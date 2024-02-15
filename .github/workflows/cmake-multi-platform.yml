@@ -74,3 +74,16 @@ jobs:
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+    - name: Publish build status to README
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 获取GitHub令牌
+      run: |
+        echo "### Build Status" >> README.md # 向README文件中添加标题
+          
+        curl \
+          --request POST \
+          --url https://api.github.com/repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA?access_token=$GITHUB_TOKEN \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "state": "${{ job.status }}"
+          }'

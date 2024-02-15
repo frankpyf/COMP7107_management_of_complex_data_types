@@ -1,11 +1,20 @@
-### Assignments of COMP7107 - Management of Complex Data Types
+# Assignments of COMP7107 - Management of Complex Data Types
 
 Language: C++ 17  
-You need to use CMake to build the project. Run the setup file in the root directory.  
-
-If you want to run the executable, make sure you put the data needed in the build directory.
-
-To run assignment1, type in the executable under the build directory and follow with a k(k is 0 by default): 
+Build System: CMake
+## To Build the project
+Please ensure CMake is properly installed. Run the setup file in the root directory.  
+### MacOS
+Enter the following in the project directory terminal
 ```
-./assignment1   2
+bash setup.command
+```
+
+## To Run the project
+Please make sure you put the data needed in the build directory.
+### MacOS
+go to the build directory  
+Example(assignment1 with k equals to 2):
+```
+./assignment1 2
 ```

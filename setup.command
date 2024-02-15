@@ -1,2 +1,1 @@
-cmake -S . -B ./build
-cmake --build ./build --config Release --target all
+sh  "`dirname "$0"`"/setup.sh
