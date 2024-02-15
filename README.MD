@@ -14,8 +14,8 @@ Please ensure CMake is properly installed. Run the setup file in the root direct
 
 ## To Run the project
 Please make sure you put the data needed in the build directory.
-### MacOS
-go to the build directory  
+
+Go to the build directory  
 Example(assignment1 with k equals to 2):
 ```
 ./assignment1 2
