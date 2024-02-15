@@ -11,11 +11,6 @@ Build System: CMake
 
 ## To Build the project
 Please ensure CMake is properly installed. Run the setup file in the root directory.  
-### MacOS
-Enter the following in the project directory terminal
-```
-bash setup.command
-```
 
 ## To Run the project
 Please make sure you put the data needed in the build directory.
