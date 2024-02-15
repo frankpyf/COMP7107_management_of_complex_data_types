@@ -1,0 +1,17 @@
+name: CMake on MacOS
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: build
+      run: ./setup.command
