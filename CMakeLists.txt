@@ -13,3 +13,12 @@ target_sources(assignment1
         src/assignment1/assignment1.cpp
 )
 target_include_directories(assignment1 PRIVATE src/assignment1)
+
+add_executable(assignment2)
+
+target_sources(assignment2
+    PRIVATE
+        src/assignment2/assignment2.hpp
+        src/assignment2/assignment2.cpp
+)
+target_include_directories(assignment2 PRIVATE src/assignment2)
