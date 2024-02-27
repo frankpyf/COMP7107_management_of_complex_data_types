@@ -1,4 +1,5 @@
 .vscode
 build
-docs/assignment1
+docs
+data
 .DS_Store

@@ -1,6 +1,7 @@
 # Assignments of COMP7107 - Management of Complex Data Types
 
-Language: C++ 17  
+Language: C++ 17   
+(From the assignment structure perspective, i wish to have C++ 20 with module)  
 Build System: CMake
 ## Build Status
 | Platform | Status   |

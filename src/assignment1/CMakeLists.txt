@@ -1,4 +1,4 @@
-project(assignment1)
+project(COMP7107)
 
 add_executable(assignment1)
 target_sources(assignment1
