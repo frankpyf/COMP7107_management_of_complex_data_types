@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     
     std::vector<comp7107::ForestCoverType> records;
 
-    std::ifstream input_file("./covtype.data");
+    std::ifstream input_file("./data/covtype.data");
     std::string str_line;
     while(std::getline(input_file, str_line))
     {
