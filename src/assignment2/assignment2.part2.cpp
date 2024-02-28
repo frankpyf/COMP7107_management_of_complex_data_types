@@ -5,6 +5,10 @@
 #include <limits>
 #include <sstream>
 #include "assignment2.hpp"
+double comp7107::Cell::min_x = 0.0f;
+double comp7107::Cell::max_x = 0.0f;
+double comp7107::Cell::min_y = 0.0f;
+double comp7107::Cell::max_y = 0.0f;
 
 int main(int argc, char* argv[])
 {
@@ -25,13 +29,8 @@ int main(int argc, char* argv[])
     std::ifstream input_file(data_path + "/grid.dir");
     std::string str_line;
     std::getline(input_file, str_line);
-    double min_x = 0.0f, max_x = 0.0f, min_y = 0.0f, max_y = 0.0f;
 
-    comp7107::parse_string_by_blank(str_line, min_x, max_x, min_y, max_y);
-    std::cout << std::to_string(min_x) << ' ' << max_x << ' ' << min_y << ' ' << std::to_string(max_y) << '\n';
- 
-    float unit_length_x = (max_x - min_x) / 10;
-    float unit_length_y = (max_y - min_y) / 10;
+    comp7107::parse_string_by_blank(str_line, comp7107::Cell::min_x, comp7107::Cell::max_x, comp7107::Cell::min_y, comp7107::Cell::max_y);
 
     while(std::getline(input_file, str_line))
     {
@@ -53,10 +52,10 @@ int main(int argc, char* argv[])
     str_stm << input_file.rdbuf() ;
     std::string grid_grid = str_stm.str();
     
-    int lower_x_idx     = (x_low - min_x) / unit_length_x;
-    int higher_x_idx    = (x_high - min_x) / unit_length_x;
-    int lower_y_idx     = (y_low - min_y) / unit_length_y;
-    int higher_y_idx    = (y_high - min_y) / unit_length_y;
+    int lower_x_idx     = (x_low - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
+    int higher_x_idx    = (x_high - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
+    int lower_y_idx     = (y_low - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+    int higher_y_idx    = (y_high - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
 
     std::ofstream query_result(data_path + "/query_result.txt");
     uint32_t count = 0;

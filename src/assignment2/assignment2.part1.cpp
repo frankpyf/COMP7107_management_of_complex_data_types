@@ -5,6 +5,11 @@
 #include <limits>
 #include "assignment2.hpp"
 
+double comp7107::Cell::min_x = std::numeric_limits<double>::max();
+double comp7107::Cell::min_y = std::numeric_limits<double>::max();
+double comp7107::Cell::max_x = std::numeric_limits<double>::min();
+double comp7107::Cell::max_y = std::numeric_limits<double>::min();
+
 int main(int argc, char* argv[])
 {
     std::ifstream input_file(data_path + "/Beijing_restaurants.txt");
@@ -13,12 +18,7 @@ int main(int argc, char* argv[])
 
     std::vector<comp7107::Restaurant> restaurants;
     std::array<std::array<comp7107::Cell, 10>, 10> grid_info;
-
-    double min_x = std::numeric_limits<double>::max();
-    double min_y = std::numeric_limits<double>::max();
-    double max_x = std::numeric_limits<double>::min();
-    double max_y = std::numeric_limits<double>::min();
-        
+    
     while(std::getline(input_file, str_line))
     {
         std::string token = str_line.substr(0, str_line.find(' '));
@@ -27,28 +27,26 @@ int main(int argc, char* argv[])
         double y = std::stod(token);
         auto& restaurant = restaurants.emplace_back(restaurants.size() + 1, x, y);
             
-        if(x < min_x)
-            min_x = x;
-        if(x > max_x)
-            max_x = x;
-        if(y < min_y)
-            min_y = y;
-        if(y > max_y)
-            max_y = y;
+        if(x < comp7107::Cell::min_x)
+            comp7107::Cell::min_x  = x;
+        if(x > comp7107::Cell::max_x)
+            comp7107::Cell::max_x = x;
+        if(y < comp7107::Cell::min_y)
+            comp7107::Cell::min_y = y;
+        if(y > comp7107::Cell::max_y)
+            comp7107::Cell::max_y = y;
     }
     input_file.close();
 
-    float unit_length_x = (max_x - min_x) / 10;
-    float unit_length_y = (max_y - min_y) / 10;
 
     // set belonging cell 
     // and get the number of records in each cell
     for(auto& restaurant : restaurants)
     {
-        restaurant.cell_x = (restaurant.x - min_x) / unit_length_x;
-        restaurant.cell_y = (restaurant.y - min_y) / unit_length_y;
+        uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
+        uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
 
-        ++grid_info[restaurant.cell_x][restaurant.cell_y].num_of_records;
+        ++grid_info[cell_idx_x][cell_idx_y].num_of_records;
     }
     uint32_t characters = 0;
     std::sort(restaurants.begin(), restaurants.end(), comp7107::comp_with_cell_idx);
@@ -58,21 +56,27 @@ int main(int argc, char* argv[])
     uint32_t last_y = 10;
     for(const auto& restaurant : restaurants)
     {
+        uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
+        uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+
         std::string out_str(std::to_string(restaurant.id) + ' ' + std::to_string(restaurant.x) + ' ' + std::to_string(restaurant.y) + '\n');
         // to avoid double from being rounded
         grid_grid << out_str;
-        auto& belonging_grid = grid_info[restaurant.cell_x][restaurant.cell_y];
-        if(last_x != restaurant.cell_x || last_y != restaurant.cell_y)
+        auto& belonging_grid = grid_info[cell_idx_x][cell_idx_y];
+        if(last_x != cell_idx_x || last_y != cell_idx_y)
         {
             belonging_grid.begin_character_pos = characters;
-            last_x = restaurant.cell_x;
-            last_y = restaurant.cell_y;
+            last_x = cell_idx_x;
+            last_y = cell_idx_y;
         }
         characters += out_str.length();
     }
 
     std::ofstream grid_dir(data_path + "/grid.dir");
-    grid_dir << std::to_string(min_x) << ' ' <<std::to_string(max_x) << ' '  << std::to_string(min_y) << ' ' <<std::to_string(max_y) << '\n';
+
+    grid_dir << std::to_string(comp7107::Cell::min_x) << ' ' <<std::to_string(comp7107::Cell::max_x) 
+    << ' '  << std::to_string(comp7107::Cell::min_y) << ' ' <<std::to_string(comp7107::Cell::max_y) << '\n';
+
     for(int i = 0; i < 10; ++i)
     {
         for(int j = 0; j < 10; ++j)

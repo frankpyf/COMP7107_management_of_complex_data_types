@@ -15,8 +15,6 @@ namespace comp7107
         uint32_t id = 0;
         double x = 0;
         double y = 0;
-        uint16_t cell_x = 0;
-        uint16_t cell_y = 0;
 
         Restaurant() = default;
         Restaurant(double in_x, double in_y) 
@@ -29,18 +27,35 @@ namespace comp7107
     struct Cell {
         uint32_t begin_character_pos = 0;
         uint32_t num_of_records = 0;
+
+        static double min_x;
+        static double min_y;
+
+        static double max_x;
+        static double max_y;
     };
+
+    double compute_euclidean_distance(const Restaurant& r1, const Restaurant& r2)
+    {
+        return sqrt((r1.x - r2.x) * (r1.x - r2.x) + (r1.y - r2.y) * (r1.y - r2.y));
+    }
 
     bool comp_with_cell_idx(const Restaurant& r1, const Restaurant& r2)
     {
-        if(r1.cell_x < r2.cell_x)
+        uint32_t r1_cell_x = (r1.x - Cell::min_x) * 10.f / (Cell::max_x - Cell::min_x);
+        uint32_t r1_cell_y = (r1.y - Cell::min_y) * 10.f / (Cell::max_y - Cell::min_y);
+
+        uint32_t r2_cell_x = (r2.x - Cell::min_x) * 10.f / (Cell::max_x - Cell::min_x);
+        uint32_t r2_cell_y = (r2.y - Cell::min_y) * 10.f / (Cell::max_y - Cell::min_y);
+
+        if(r1_cell_x < r2_cell_x)
             return true;
-        else if(r1.cell_x > r2.cell_x)
+        else if(r1_cell_x > r2_cell_x)
             return false;
         
-        if(r1.cell_y < r2.cell_y)
+        if(r1_cell_y < r2_cell_y)
             return true;
-        else if(r1.cell_y > r2.cell_y)
+        else if(r1_cell_y > r2_cell_y)
             return false;
 
         return r1.id < r2.id;
