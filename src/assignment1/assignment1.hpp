@@ -7,6 +7,9 @@
 #include <thread>
 #include <sstream>
 
+#define STRING(x) #x
+#define XSTRING(x) STRING(x)
+
 namespace comp7107
 {
     /**

@@ -5,8 +5,10 @@
 #include <algorithm>
 #include <chrono>
 
+
 int main(int argc, char* argv[])
 {
+    std::string data_path(XSTRING(DATA_PATH));
     std::chrono::steady_clock::time_point start(std::chrono::steady_clock::now());
     uint16_t k = 0;
     if(argc > 1)
@@ -14,7 +16,7 @@ int main(int argc, char* argv[])
     
     std::vector<comp7107::ForestCoverType> records;
 
-    std::ifstream input_file("./data/covtype.data");
+    std::ifstream input_file(data_path + "/covtype.data");
     std::string str_line;
     while(std::getline(input_file, str_line))
     {
@@ -35,7 +37,7 @@ int main(int argc, char* argv[])
     // Part 2: 
     ///////////////////////////////////////
     comp7107::normalize(records);
-    std::ofstream normalized_records("./normalized.data");
+    std::ofstream normalized_records(data_path + "/normalized.data");
     for(const auto& record : records)
     {
         normalized_records << record << '\n';

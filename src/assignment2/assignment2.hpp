@@ -4,6 +4,11 @@
 #include <fstream>
 #include <string>
 
+#define STRING(x) #x
+#define XSTRING(x) STRING(x)
+
+static const std::string data_path(XSTRING(DATA_PATH));
+
 namespace comp7107
 {
     struct Restaurant {

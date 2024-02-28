@@ -7,4 +7,3 @@ target_sources(assignment1
         assignment1.cpp
 )
 target_include_directories(assignment1 PRIVATE assignment1)
-file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

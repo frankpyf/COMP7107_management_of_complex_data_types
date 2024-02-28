@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
     }
     std::array<std::array<comp7107::Cell, 10>, 10> cell_infos;
 
-    std::ifstream input_file("./grid.dir");
+    std::ifstream input_file(data_path + "/grid.dir");
     std::string str_line;
     std::getline(input_file, str_line);
     double min_x = 0.0f, max_x = 0.0f, min_y = 0.0f, max_y = 0.0f;
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     }
     input_file.close();
 
-    input_file.open("./grid.grid");
+    input_file.open(data_path + "/grid.grid");
     std::ostringstream str_stm;
     str_stm << input_file.rdbuf() ;
     std::string grid_grid = str_stm.str();
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
     int lower_y_idx     = (y_low - min_y) / unit_length_y;
     int higher_y_idx    = (y_high - min_y) / unit_length_y;
 
-    std::ofstream query_result("./query_result.txt");
+    std::ofstream query_result(data_path + "/query_result.txt");
     uint32_t count = 0;
     for(int i = lower_x_idx; i <= higher_x_idx; ++i)
     {
@@ -94,8 +94,8 @@ int main(int argc, char* argv[])
                 offset = pos + 1;
                 continue;
             }
-
         }
     }
+    std::cout << "There are " << count << " records in the query window" << '\n';
     return 0;
 }   

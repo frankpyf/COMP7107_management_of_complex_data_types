@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[])
 {
-    std::ifstream input_file("./data/Beijing_restaurants.txt");
+    std::ifstream input_file(data_path + "/Beijing_restaurants.txt");
     std::string str_line;
     std::getline(input_file, str_line);
 
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     uint32_t characters = 0;
     std::sort(restaurants.begin(), restaurants.end(), comp7107::comp_with_cell_idx);
 
-    std::ofstream grid_grid("./grid.grid");
+    std::ofstream grid_grid(data_path + "/grid.grid");
     uint32_t last_x = 10;
     uint32_t last_y = 10;
     for(const auto& restaurant : restaurants)
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
         characters += out_str.length();
     }
 
-    std::ofstream grid_dir("./grid.dir");
+    std::ofstream grid_dir(data_path + "/grid.dir");
     grid_dir << std::to_string(min_x) << ' ' <<std::to_string(max_x) << ' '  << std::to_string(min_y) << ' ' <<std::to_string(max_y) << '\n';
     for(int i = 0; i < 10; ++i)
     {
