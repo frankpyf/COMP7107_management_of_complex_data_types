@@ -12,7 +12,7 @@ static const std::string data_path(XSTRING(DATA_PATH));
 namespace comp7107
 {
     struct Restaurant {
-        uint32_t id = 0;
+        uint32_t id = std::numeric_limits<uint32_t>::max();
         double x = 0;
         double y = 0;
 
@@ -25,8 +25,10 @@ namespace comp7107
     };
 
     struct Cell {
-        uint32_t begin_character_pos = 0;
-        uint32_t num_of_records = 0;
+        uint32_t begin_character_pos    = 0;
+        uint32_t num_of_records         = 0;
+        uint32_t idx_x                  = 0;
+        uint32_t idx_y                  = 0;
 
         static double min_x;
         static double min_y;
@@ -38,6 +40,63 @@ namespace comp7107
     double compute_euclidean_distance(const Restaurant& r1, const Restaurant& r2)
     {
         return sqrt((r1.x - r2.x) * (r1.x - r2.x) + (r1.y - r2.y) * (r1.y - r2.y));
+    }
+
+    double compute_euclidean_distance(const Restaurant& r, const Cell& c)
+    {
+        double unit_length_x = (Cell::max_x - Cell::min_x) / 10.0f;
+        double unit_length_y = (Cell::max_y - Cell::min_y) / 10.0f;
+        uint32_t r_cell_x = (r.x - Cell::min_x) * 10.f / (Cell::max_x - Cell::min_x);
+        uint32_t r_cell_y = (r.y - Cell::min_y) * 10.f / (Cell::max_y - Cell::min_y);
+        if(r_cell_x == c.idx_x)
+        {
+            if(r_cell_y > c.idx_y)
+            {
+                return r.y - (c.idx_y + 1) * unit_length_y;
+            }
+            else
+            {
+                return c.idx_y * unit_length_y - r.y;
+            }
+        }
+        if(r_cell_y == c.idx_y)
+        {
+            if(r_cell_x > c.idx_x)
+            {
+                return r.x - (c.idx_x + 1) * unit_length_x;
+            }
+            else
+            {
+                return c.idx_x * unit_length_x - r.x;
+            }
+        }
+        if(r_cell_x < c.idx_x)
+        {
+            if(r_cell_y < c.idx_y)
+            {
+                return sqrt((c.idx_x * unit_length_x - r.x) * (c.idx_x * unit_length_x - r.x) + 
+                            (c.idx_y * unit_length_y - r.y) * (c.idx_y * unit_length_y - r.y));
+            }
+            else
+            {
+                return sqrt((c.idx_x * unit_length_x - r.x) * (c.idx_x * unit_length_x - r.x) + 
+                            (r.y - (c.idx_y + 1) * unit_length_y) * (r.y - (c.idx_y + 1) * unit_length_y));
+            }
+        }
+        else
+        {
+            if(r_cell_y < c.idx_y)
+            {
+                return sqrt((r.x - (c.idx_x + 1) * unit_length_x) * (r.x - (c.idx_x + 1) * unit_length_x) + 
+                            (c.idx_y * unit_length_y - r.y) * (c.idx_y * unit_length_y - r.y));
+            }
+            else
+            {
+                return sqrt((r.x - (c.idx_x + 1) * unit_length_x) * (r.x - (c.idx_x + 1) * unit_length_x) + 
+                            (r.y - (c.idx_y + 1) * unit_length_y) * (r.y - (c.idx_y + 1) * unit_length_y));
+            }
+        }
+        return 0.0f;
     }
 
     bool comp_with_cell_idx(const Restaurant& r1, const Restaurant& r2)
