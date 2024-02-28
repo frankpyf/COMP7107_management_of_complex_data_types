@@ -39,7 +39,7 @@ namespace comp7107
 
     double compute_euclidean_distance(const Restaurant& r1, const Restaurant& r2)
     {
-        return sqrt((r1.x - r2.x) * (r1.x - r2.x) + (r1.y - r2.y) * (r1.y - r2.y));
+        return std::sqrt((r1.x - r2.x) * (r1.x - r2.x) + (r1.y - r2.y) * (r1.y - r2.y));
     }
 
     double compute_euclidean_distance(const Restaurant& r, const Cell& c)
@@ -74,12 +74,12 @@ namespace comp7107
         {
             if(r_cell_y < c.idx_y)
             {
-                return sqrt((c.idx_x * unit_length_x - r.x) * (c.idx_x * unit_length_x - r.x) + 
+                return std::sqrt((c.idx_x * unit_length_x - r.x) * (c.idx_x * unit_length_x - r.x) + 
                             (c.idx_y * unit_length_y - r.y) * (c.idx_y * unit_length_y - r.y));
             }
             else
             {
-                return sqrt((c.idx_x * unit_length_x - r.x) * (c.idx_x * unit_length_x - r.x) + 
+                return std::sqrt((c.idx_x * unit_length_x - r.x) * (c.idx_x * unit_length_x - r.x) + 
                             (r.y - (c.idx_y + 1) * unit_length_y) * (r.y - (c.idx_y + 1) * unit_length_y));
             }
         }
@@ -87,12 +87,12 @@ namespace comp7107
         {
             if(r_cell_y < c.idx_y)
             {
-                return sqrt((r.x - (c.idx_x + 1) * unit_length_x) * (r.x - (c.idx_x + 1) * unit_length_x) + 
+                return std::sqrt((r.x - (c.idx_x + 1) * unit_length_x) * (r.x - (c.idx_x + 1) * unit_length_x) + 
                             (c.idx_y * unit_length_y - r.y) * (c.idx_y * unit_length_y - r.y));
             }
             else
             {
-                return sqrt((r.x - (c.idx_x + 1) * unit_length_x) * (r.x - (c.idx_x + 1) * unit_length_x) + 
+                return std::sqrt((r.x - (c.idx_x + 1) * unit_length_x) * (r.x - (c.idx_x + 1) * unit_length_x) + 
                             (r.y - (c.idx_y + 1) * unit_length_y) * (r.y - (c.idx_y + 1) * unit_length_y));
             }
         }

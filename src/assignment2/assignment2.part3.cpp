@@ -68,8 +68,6 @@ namespace comp7107
         };
         const Restaurant& get_next_nearest_restaurant()
         {
-            if(heap_p_.empty())
-                return Restaurant();
             const auto& restaurant = heap_p_.top();
             heap_p_.pop();
             
