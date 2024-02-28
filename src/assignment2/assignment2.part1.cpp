@@ -17,8 +17,8 @@ int main(int argc, char* argv[])
     std::getline(input_file, str_line);
 
     std::vector<comp7107::Restaurant> restaurants;
-    std::array<std::array<comp7107::Cell, 10>, 10> grid_info;
-    
+    std::array<comp7107::Cell, 100> grid_info;
+
     while(std::getline(input_file, str_line))
     {
         std::string token = str_line.substr(0, str_line.find(' '));
@@ -45,8 +45,11 @@ int main(int argc, char* argv[])
     {
         uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
         uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+        auto& cur_grid = grid_info[cell_idx_x * 10 + cell_idx_y];
 
-        ++grid_info[cell_idx_x][cell_idx_y].num_of_records;
+        ++cur_grid.num_of_records;
+        cur_grid.idx_x = cell_idx_x;
+        cur_grid.idx_y = cell_idx_y;
     }
     uint32_t characters = 0;
     std::sort(restaurants.begin(), restaurants.end(), comp7107::comp_with_cell_idx);
@@ -62,7 +65,7 @@ int main(int argc, char* argv[])
         std::string out_str(std::to_string(restaurant.id) + ' ' + std::to_string(restaurant.x) + ' ' + std::to_string(restaurant.y) + '\n');
         // to avoid double from being rounded
         grid_grid << out_str;
-        auto& belonging_grid = grid_info[cell_idx_x][cell_idx_y];
+        auto& belonging_grid = grid_info[cell_idx_x * 10 + cell_idx_y];
         if(last_x != cell_idx_x || last_y != cell_idx_y)
         {
             belonging_grid.begin_character_pos = characters;
@@ -81,9 +84,9 @@ int main(int argc, char* argv[])
     {
         for(int j = 0; j < 10; ++j)
         {
-            if(grid_info[i][j].num_of_records == 0)
+            if(grid_info[i * 10 + j].num_of_records == 0)
                 continue;
-            grid_dir << i << ' ' << j << ' ' << grid_info[i][j].begin_character_pos << ' ' << grid_info[i][j].num_of_records << '\n';
+            grid_dir << i << ' ' << j << ' ' << grid_info[i * 10 + j].begin_character_pos << ' ' << grid_info[i * 10 + j].num_of_records << '\n';
         }
     }
     

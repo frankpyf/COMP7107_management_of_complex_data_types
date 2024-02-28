@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
         y_low   = std::stod(argv[3]);
         y_high  = std::stod(argv[4]);
     }
-    std::array<std::array<comp7107::Cell, 10>, 10> cell_infos;
+    std::array<comp7107::Cell, 100> cell_infos;
 
     std::ifstream input_file(data_path + "/grid.dir");
     std::string str_line;
@@ -41,7 +41,9 @@ int main(int argc, char* argv[])
 
         comp7107::parse_string_by_blank(str_line, idx_x, idx_y, begin_character_pos, num_of_records);
 
-        auto& cell = cell_infos[idx_x][idx_y];
+        auto& cell = cell_infos[idx_x * 10 + idx_y];
+        cell.idx_x = idx_x;
+        cell.idx_y = idx_y;
         cell.begin_character_pos = begin_character_pos;
         cell.num_of_records = num_of_records;
     }
@@ -64,8 +66,8 @@ int main(int argc, char* argv[])
         for(int j = lower_y_idx; j <= higher_y_idx; ++j)
         {
             std::cout << "cell: " << i << ", " << j << " is intersected with query window" << '\n';
-            uint32_t offset = cell_infos[i][j].begin_character_pos;
-            uint32_t iterations = cell_infos[i][j].num_of_records;
+            uint32_t offset = cell_infos[i * 10 + j].begin_character_pos;
+            uint32_t iterations = cell_infos[i * 10 + j].num_of_records;
             uint32_t pos = offset;
             for(int k = 0; k < iterations; ++k)
             {
