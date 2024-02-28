@@ -14,10 +14,15 @@ Build System: CMake
 Please ensure CMake is properly installed. Run the setup file in the root directory.  
 
 ## To Run the project
-Please make sure you put the data needed in the build directory.
+Please first create a data directory under the root directory, and put all the data required into that data directory before you run the executables.  
+After building, your folder should look like something like this:
+```
+.
+├── build
+├── data 
+├── src          
+├── CMakeLists.txt                  
+└── README.md
+```
 
-Go to the build directory  
-Example(assignment1 with k equals to 2):
-```
-./assignment1 2
-```
+Go to the build directory, find the corresponding assignment folder, and fire it up.
