@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cmath>
 
 #define STRING(x) #x
 #define XSTRING(x) STRING(x)
