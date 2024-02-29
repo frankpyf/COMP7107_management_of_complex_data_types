@@ -2,6 +2,7 @@
 #include "assignment2.hpp"
 #include <queue>
 #include <vector>
+#include <array>
 #include <sstream>
 #include <unordered_set>
 
