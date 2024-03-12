@@ -45,6 +45,14 @@ int main(int argc, char* argv[])
     {
         uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
         uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+        if(cell_idx_x == 10)
+        {
+            cell_idx_x = 9;
+        }
+        if(cell_idx_y == 10)
+        {
+            cell_idx_y = 9;
+        }
         auto& cur_grid = grid_info[cell_idx_x * 10 + cell_idx_y];
 
         ++cur_grid.num_of_records;
@@ -61,6 +69,14 @@ int main(int argc, char* argv[])
     {
         uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
         uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+        if(cell_idx_x == 10)
+        {
+            cell_idx_x = 9;
+        }
+        if(cell_idx_y == 10)
+        {
+            cell_idx_y = 9;
+        }
 
         std::string out_str(std::to_string(restaurant.id) + ' ' + std::to_string(restaurant.x) + ' ' + std::to_string(restaurant.y) + '\n');
         // to avoid double from being rounded
