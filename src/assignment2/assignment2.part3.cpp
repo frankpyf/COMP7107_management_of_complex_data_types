@@ -81,6 +81,7 @@ namespace comp7107
                     return restaurant;
                 auto& in_cell = heap_c_.top();
                 heap_c_.pop();
+                std::cout << "de-heap cell (" << in_cell.idx_x << ", " << in_cell.idx_y << ')';
                 push_surrounding_cells(in_cell);
 
                 uint32_t offset = in_cell.begin_character_pos;
