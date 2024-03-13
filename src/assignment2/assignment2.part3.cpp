@@ -28,7 +28,7 @@ namespace comp7107
             bool operator() (const T& r1, const T& r2)
             {
                 Restaurant r(q_x, q_y);
-                return compute_euclidean_distance(r, r1) < compute_euclidean_distance(r, r2);
+                return compute_euclidean_distance(r, r1) > compute_euclidean_distance(r, r2);
             }
         };
         using priority_queue_for_points = std::priority_queue<Restaurant, std::vector<Restaurant>, comp_with_dist_to_q<Restaurant>>;
@@ -71,6 +71,8 @@ namespace comp7107
         {
             const auto& restaurant = heap_p_.top();
             heap_p_.pop();
+            Restaurant query_restaurant(q_x, q_y);
+            std::cout << "euclidean distance: " << compute_euclidean_distance(restaurant, query_restaurant) << '\n';
             
             // deheap the next nearest cell, and add all the points in that cell to the heap
             if(heap_p_.empty())
@@ -169,7 +171,7 @@ int main(int argc, char* argv[])
     for(int i = 0; i < k; ++i)
     {
         auto& cur_restaurant = nn.get_next_nearest_restaurant();
-        std::cout << cur_restaurant.id << ' ' << cur_restaurant.x << ' ' << cur_restaurant.y << '\n';
+        std::cout << cur_restaurant.id << ' ' << std::to_string(cur_restaurant.x) << ' ' << std::to_string(cur_restaurant.y) << '\n';
     }
     
     return 0;
