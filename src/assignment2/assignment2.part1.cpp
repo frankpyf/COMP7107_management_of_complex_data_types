@@ -43,8 +43,8 @@ int main(int argc, char* argv[])
     // and get the number of records in each cell
     for(auto& restaurant : restaurants)
     {
-        uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
-        uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+        uint32_t cell_idx_x = std::floor((restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x));
+        uint32_t cell_idx_y = std::floor((restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y));
         if(cell_idx_x == 10)
         {
             cell_idx_x = 9;
@@ -67,8 +67,8 @@ int main(int argc, char* argv[])
     uint32_t last_y = 10;
     for(const auto& restaurant : restaurants)
     {
-        uint32_t cell_idx_x = (restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x);
-        uint32_t cell_idx_y = (restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y);
+        uint32_t cell_idx_x = std::floor((restaurant.x - comp7107::Cell::min_x) * 10.f / (comp7107::Cell::max_x - comp7107::Cell::min_x));
+        uint32_t cell_idx_y = std::floor((restaurant.y - comp7107::Cell::min_y) * 10.f / (comp7107::Cell::max_y - comp7107::Cell::min_y));
         if(cell_idx_x == 10)
         {
             cell_idx_x = 9;
