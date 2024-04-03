@@ -79,7 +79,7 @@ namespace comp7107
             {
                 if(heap_c_.empty())
                     return restaurant;
-                auto& in_cell = heap_c_.top();
+                const auto& in_cell = heap_c_.top();
                 heap_c_.pop();
                 std::cout << "de-heap cell (" << in_cell.idx_x << ", " << in_cell.idx_y << ')';
                 push_surrounding_cells(in_cell);
@@ -171,7 +171,7 @@ int main(int argc, char* argv[])
 
     for(int i = 0; i < k; ++i)
     {
-        auto& cur_restaurant = nn.get_next_nearest_restaurant();
+        const auto& cur_restaurant = nn.get_next_nearest_restaurant();
         std::cout << cur_restaurant.id << ' ' << std::to_string(cur_restaurant.x) << ' ' << std::to_string(cur_restaurant.y) << '\n';
     }
     
