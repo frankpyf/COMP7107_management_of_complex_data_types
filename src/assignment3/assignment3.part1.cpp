@@ -24,7 +24,7 @@ namespace comp7107
     };
 } // namespace comp7107
 
-int main()
+int main(int argc, char* argv[])
 {
     ///////////////////
     // Task1.1
