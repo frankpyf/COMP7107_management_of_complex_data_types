@@ -7,23 +7,6 @@
 #include <iomanip>
 #include "assignment3.hpp"
 
-namespace comp7107
-{
-    struct AdjacencyInfo {
-        AdjacencyInfo(long in_timestamp, int in_id, int in_sentiment)
-        : unix_timestamp(in_timestamp), id(in_id), sentiment(in_sentiment){}
-
-        const bool operator==(const AdjacencyInfo& other) const
-        {
-            return unix_timestamp == other.unix_timestamp && id == other.id && sentiment == other.sentiment;
-        }
-
-        long unix_timestamp;
-        int id;
-        int sentiment;  
-    };
-} // namespace comp7107
-
 int main(int argc, char* argv[])
 {
     ///////////////////
@@ -38,7 +21,7 @@ int main(int argc, char* argv[])
     {
         std::string src_reddit;
         std::string tgt_reddit;
-        comp7107::parse(str_line, src_reddit, tgt_reddit);
+        comp7107::parse(str_line, '\t', src_reddit, tgt_reddit);
         if(src_reddit.length() > 0)
             unique_subreddit.insert(src_reddit);
         if(tgt_reddit.length() > 0)
@@ -75,7 +58,7 @@ int main(int argc, char* argv[])
         std::string post_id;
         int sentiment;
 
-        comp7107::parse(str_line, src_reddit, tgt_reddit, post_id, timestamp, sentiment);
+        comp7107::parse(str_line, '\t', src_reddit, tgt_reddit, post_id, timestamp, sentiment);
         int src_id = dict[src_reddit];
         int tgt_id = dict[tgt_reddit];
 
