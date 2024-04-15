@@ -113,7 +113,8 @@ int main(int argc, char* argv[])
             // do something
             char time_buf[80];
             std::tm ts;
-            ts = *localtime(static_cast<time_t*>(&dist[closest_id]));
+            std::time_t time_from_long = dist[closest_id];
+            ts = *localtime(&time_from_long);
             strftime(time_buf, sizeof(time_buf), "%Y-%m-%d %H:%M:%S", &ts);
             std::string temp(time_buf);
             std::cout << "Arrival Time: " << temp << '\n';
