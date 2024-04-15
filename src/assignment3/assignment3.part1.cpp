@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
             unique_subreddit.insert(tgt_reddit);
     }
     input_file.clear();
-    input_file.seekg (0, std::ios::beg);
+    input_file.seekg(0, std::ios::beg);
 
     std::vector<std::string> dict_vec(unique_subreddit.begin(), unique_subreddit.end());
     std::sort(dict_vec.begin(), dict_vec.end());
